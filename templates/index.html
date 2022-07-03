@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">   
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='/style.css') }}">
+    <title>Stock Screener</title>
+</head>
+<body>
+    <h1>Stock Screener</h1>
+    <form>
+        <select name="pattern">
+            {% for pattern in patterns %}
+            <option value="{{ pattern }}" {% if pattern == current_pattern %} selected="selected" {% endif %}>{{ patterns[pattern] }}</option>
+            {% endfor %}
+        </select>
+        
+        <input type="submit" value="Search" />
+    </form>
+
+    <table>
+        <tr>
+            <th>
+                Symbol
+            </th>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Signal
+            </th>
+        </tr>
+
+        {% for stock in stocks %}
+            {% if stocks[stock][current_pattern] %}
+            <tr>
+                <td>
+                    {{ stock }}
+                </td>
+                <td>
+                    {{ stocks[stock]['company'] }}
+                </td>
+                <td class=" {{ stocks[stock][current_pattern] }}">
+                    {{ stocks[stock][current_pattern] }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <img src="https://finviz.com/chart.ashx?t={{ stock }}&ty=c&ta=1&p=d&s=l" alt="candlestick chart">
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+    
+
+</body>
+</html>

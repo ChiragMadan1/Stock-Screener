@@ -1,0 +1,25 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;  
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin-left: 10px;
+    background: #e4dfd1;
+}
+
+td {
+    padding: 5px;
+}
+
+.bullish {
+    background: green;
+    color: white;
+}
+
+.bearish {
+    background: red;
+    color: white;
+}
